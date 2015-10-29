@@ -49,6 +49,30 @@ class query {
         return $result;
     }
     
+    public function insertQuery($tableName, $valuesArray){
+        
+        //template query
+        $sql = "insert into ".$tableName."(";
+        $columns = "";
+        $values = "";
+        
+        
+        //append columns and values to a string format 
+        foreach ($valuesArray as $key => $value) {
+            $columns .= $key.",";
+            $values  .= $valuesArray.", ";
+        }
+               
+        //remove last "," mark from boths columns and values strings
+        $columns = substr($columns, 0, -1);
+        $values = substr($values, 0,-1);
+        
+        $sql .=$columns.") values (".$values.");";
+        //return insert query
+        return $sql;
+        
+    }
+    
     
     
 }
