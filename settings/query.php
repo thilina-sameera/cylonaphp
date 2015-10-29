@@ -49,7 +49,7 @@ class query {
         return $result;
     }
     
-    public function insertQuery($tableName, $valuesArray){
+    public function insertQuery($tableName, $values = Array()){
         
         //template query
         $sql = "insert into ".$tableName."(";
@@ -58,7 +58,7 @@ class query {
         
         
         //append columns and values to a string format 
-        foreach ($valuesArray as $key => $value) {
+        foreach ($valuesArray as $key => $values) {
             $columns .= $key.",";
             $values  .= $valuesArray.", ";
         }

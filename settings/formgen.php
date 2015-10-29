@@ -12,15 +12,18 @@
  * @author Thilina
  */
 class formgen {
-    //put your code here
+    //store source code of form
     public $html = "<form ";
     public $name = array();
     public static $i = 0;
-    
-    function __construct() {
-        $html .='action="./formactionpage.php" method="post">';
+    public $actionPage;
+    //open a form in html
+    function __construct($actionpage) {
+        $html .='action="'.$actionpage.'" method="post">';
+        $this->actionPage = $actionpage;
     }
     
+    //add a text field to a form
     public function addTextFiled($title,$name){
         $html .= $title." : <br>";
         $html .= '<input type="text" name="'.$name.'"><br>';
@@ -28,16 +31,48 @@ class formgen {
         $i++;
     }
     
-    public function addDropdown($title, $name, $options = array()){
-        
+    //add a password field to a form
+    public function addPasswordFiled($title,$name){
+        $html .= $title." : <br>";
+        $html .= '<input type="password" name="'.$name.'"><br>';
+        $this->name[$i] = $name;
+        $i++;
     }
     
+    
+    //add a textarea to a form
+    public function addTextArea($title,$name,$cols,$rows){
+        $html .= $title." : <br>";
+        $html .= '<textarea name="'.$name.'" rows="'.$rows.'" cols="'.$cols.'">';
+        $html .= '</textarea>';
+        $this->name[$i] = $name;
+        $i++;
+    }
+    
+    //add a dropdown box for code
+    public function addDropdown($title, $name, $options = array()){
+        $html .= $title." :<br>";
+        $html .= '<select name="'.$name.'">';
+        
+        foreach ($item as $options){
+            $html .= '<option value="'.$item.'">'.$item.'"</option><br>';
+        }
+        
+        $html .= '</select>';
+        
+        //for use of action listener page
+        $this->name[$i] = $name;
+        $i++;
+    }
+    
+    //form action handle page
     public function writeActionsPage(){
         
     }
 
-
-    public function fetchForm(){
+    //finalize form
+    public function fetchForm($btnName){
+        $html .= '<input type="submit" value="'.$btnName.'">';
         $html .= '</form>';
         return $html;
     }
