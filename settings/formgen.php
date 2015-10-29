@@ -54,7 +54,7 @@ class formgen {
         $html .= $title." :<br>";
         $html .= '<select name="'.$name.'">';
         
-        foreach ($item as $options){
+        foreach ($options as $item){
             $html .= '<option value="'.$item.'">'.$item.'"</option><br>';
         }
         
@@ -69,8 +69,35 @@ class formgen {
     public function writeActionsPage(){
         
     }
+    
+    public function headActions(){
+        
+        $postPhp = 'if(isset(';
+        $values ="";
+        foreach($this->name as $val){
+            $values .= '$_POST["'.$val.'"] &&';
+        }
+        //remove last && signs
+        $values = substr($values, 0,-2);
+        
+        //continue code genarating
+        $postPhp .= ')){'
+                . '//add your code here'
+                . '}';
+        
+        return $postPhp;
+    }
+    
+    public function writeFormPostFile(){
+        $page = "<?php ";
+        $page .= $this->headActions();
+        $page .= "?>";
+        
+        filewritter::write($this->actionPage, $page);
+    }
 
-    //finalize form
+
+        //finalize form
     public function fetchForm($btnName){
         $html .= '<input type="submit" value="'.$btnName.'">';
         $html .= '</form>';
