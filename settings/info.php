@@ -24,6 +24,7 @@ class info {
         
     }
     
+    //fill database connection details inside db array
     public function getDbDetails(){
         $db = array(
             "servername" => $this->servername,
@@ -38,4 +39,12 @@ class info {
     }
     
     
+    //put your queries to sqlQuery array 
+    public function getQuery(){
+        $sqlQuery = array(
+            "test" => "select * from customers"
+        );
+        
+        return $sqlQuery;
+    }    
 }
