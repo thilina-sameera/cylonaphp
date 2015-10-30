@@ -1,6 +1,9 @@
 <?php
 
 class cy_queryBuilder {
+    
+    public $cus;
+    
    
     /*
      *Easy Query Genarater 
@@ -15,13 +18,14 @@ class cy_queryBuilder {
      * 
      */
     public function table($tableName){
-        echo "Table";
+        $select =  "select * from ".$tableName."";
+        $this->cus = $select;
         return $this;
     }
     
-    public function find($row){
-        echo "Tobby";
-        return $this;
+    public function find($colmn, $value){
+        $find = " where ".$colmn."=".$value."";
+        return $this->cus.$find;
     }
     
     

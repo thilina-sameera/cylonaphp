@@ -16,7 +16,7 @@ and open the template in the editor.
         
               echo "<h1>Hello Thilina</h1>"; 
               $row = new cy_queryBuilder();
-              $row->table("Hi")->find();
+              echo $row->table("customer")->find("customerID", 2);
         ?>
     </body>
 </html>
