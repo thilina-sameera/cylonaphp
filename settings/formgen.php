@@ -65,11 +65,24 @@ class formgen {
         $i++;
     }
     
+    //add CheckedBox for form
+    public function addCheckBox($name, $values = array()){
+        
+        foreach($values as $value){
+            $chk .= '<input type="radio" name="'.$name.'" value="'.$value.'">'.$value.'<br>';            
+        }
+        $html .= $chk;
+        //for use of action listener page
+        $this->name[$i] = $name;
+        $i++;
+    }
+    
     //form action handle page
     public function writeActionsPage(){
         
     }
     
+    //genarate file head
     public function headActions(){
         
         $postPhp = 'if(isset(';
@@ -88,6 +101,7 @@ class formgen {
         return $postPhp;
     }
     
+    //create action received page
     public function writeFormPostFile(){
         $page = "<?php ";
         $page .= $this->headActions();
@@ -95,6 +109,11 @@ class formgen {
         
         filewritter::write($this->actionPage, $page);
     }
+    
+    //add customize code
+    public function addCustomElement($code){
+        $html .= $code;
+    } 
 
 
         //finalize form
