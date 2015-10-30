@@ -10,8 +10,13 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
+        <h1>Boothaya</h1>
+        <?php  
+              include_once './models/cy_queryBuilder.php';  
+        
+              echo "<h1>Hello Thilina</h1>"; 
+              $row = new cy_queryBuilder();
+              $row->table("Hi")->find();
         ?>
     </body>
 </html>
