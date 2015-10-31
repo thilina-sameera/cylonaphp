@@ -13,10 +13,11 @@ and open the template in the editor.
         <h1>Boothaya</h1>
         <?php  
               include_once './models/cy_queryBuilder.php';  
-        
-              echo "<h1>Hello Thilina</h1>"; 
-              $row = new cy_queryBuilder();
-              echo $row->table("customer")->find("customerID", 2);
+              
+              $test = new cy_queryBuilder();
+              $array = array("Name", "Gender","Address");
+              
+              echo $test->selectCustomTable($tablename, $array)->where("Name", "=", "Thilina");
         ?>
     </body>
 </html>
