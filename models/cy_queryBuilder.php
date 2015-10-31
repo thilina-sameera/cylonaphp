@@ -23,6 +23,11 @@ class cy_queryBuilder {
         return $this;
     }
     
+    public function selectTableOnly($tableName){
+        $select =  "select * from ".$tableName."";
+        return $select;
+    }
+    
     /*
      * Select only selected columns in query
      * selecting columns are pass by array call columnName 
@@ -38,6 +43,18 @@ class cy_queryBuilder {
         $select = substr($select, 0, -2);
         $this->cus = $select." from ".$tablename." ";
         return $this;
+    }
+    
+    public function selectCustomTableOnly($tablename, $columnNames = array()){
+        //get columnName array values to a formated string 
+        $select = "select ";
+        foreach ($columnNames as $col){
+            $select .= $col.", ";
+        }
+        //remove last , symbol
+        $select = substr($select, 0, -2);
+        $query = $select." from ".$tablename." ";
+        return $query;
     }
     
     /*

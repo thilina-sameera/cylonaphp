@@ -10,18 +10,24 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <h1>Boothaya</h1>
+        <h1>Welcome To CylonaPHP</h1>
         <?php  
               include_once './models/cy_queryBuilder.php';  
+              //select * from Customers
+             $query = new cy_queryBuilder();
+             echo $query->selectTableOnly("Customer");
+             echo "<br>";
+             
+              //select * from Customers Where Country = USA
+             $query2 = new cy_queryBuilder();
+             echo $query2->selectTable("Customer")->where("Country", "=", "USA");
+             echo "<br>";
+      
+              //select * from Customer Where Country = USA OR age > 50
+             $query3  = new cy_queryBuilder();
+             echo $query3->selectTable("Customer")->whereOR("Country","=", "USA")->where("Age", ">", "50");
+             echo "<br>";
               
-              //create a query object
-              $query  = new cy_queryBuilder();
-              //print query with or clause
-              echo $query->selectTable("Customers")->findOR("Name", "Thilina")->find("Name", "Naveen");
-              //print query with whereOR
-              echo "</br>";
-              $query2 = new cy_queryBuilder();
-              echo $query->selectTable("Universities")->whereOR("Rank", ">", "23")->where("Rank", "<", "50");
         ?>
     </body>
 </html>
