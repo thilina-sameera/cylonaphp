@@ -45,8 +45,25 @@ class cy_queryBuilder {
      * return query to selected column and value
      */
     public function find($colmn, $value){
-        $find = " where ".$colmn."=".$value."";
-        return $this->cus.$find;
+        if(defined("ORclause")){
+            $find = " ".$colmn."=".$value."";
+            return $this->cus.$find;
+        }else{
+            $find = " where ".$colmn."=".$value."";
+            return $this->cus.$find;
+        }
+    }
+    
+    /*
+     * genarate where sql queries
+     * return query to selected column and value
+     * Support OR
+     */
+    public function findOR($colmn, $value){
+        define("ORclause","true");
+        $find = " Where ".$colmn."=".$value." OR ";
+        $this->cus .= $find;
+        return $this;
     }
     
     /*
@@ -54,11 +71,26 @@ class cy_queryBuilder {
      * where query with < > => =< opereators
      */
     public function where($colmn, $operator, $value){
-        $where = " where ".$colmn." ".$operator." ".$value." ";
-        return $this->cus.$where;
+        
+        if(defined("WhereOR")){
+            $where = " ".$colmn." ".$operator." ".$value." ";
+            return $this->cus.$where;
+        }else{
+            $where = " where ".$colmn." ".$operator." ".$value." ";
+            return $this->cus.$where;
+        }
     }
     
-    
+    /*
+     * Where OR function
+     * use to join two where caluese
+     */
+    public function whereOR($colmn, $operator, $value){
+        define("WhereOR", "true");
+        $where = " where ".$colmn." ".$operator." ".$value." OR ";
+        $this->cus .= $where;
+        return $this;
+    }
     
   
     
